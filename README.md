@@ -43,3 +43,80 @@
 ### ✔️ Timeline unificado
 Endpoint:
 
+GET /api/pets/{id}/timeline
+Combina en orden cronológico:
+
+- Visitas veterinarias  
+- Eventos  
+- Medicaciones (usando fecha de próxima dosis)
+
+---
+
+## ⏰ Programación automática de avisos
+
+Se ejecuta periódicamente una tarea con `@Scheduled` que:
+
+- Detecta medicaciones atrasadas  
+- Detecta medicaciones próximas  
+- Imprime avisos por logs (extensible a emails, notificaciones, etc.)
+
+Configuración desde `application.properties`:
+
+```properties
+petcare.medication.check-interval-ms=300000
+petcare.medication.upcoming-window-minutes=60
+
+📂 Estructura del proyecto
+src/main/java/com/pedro/petcare
+ ├── controller
+ ├── service
+ │    └── impl
+ ├── repository
+ ├── model
+ ├── scheduler
+ └── exception
+
+🧪 Endpoints principales
+Mascotas
+GET /api/pets
+GET /api/pets/{id}
+POST /api/pets
+PUT /api/pets/{id}
+DELETE /api/pets/{id}
+
+Medicaciones
+GET /api/pets/{id}/medications
+POST /api/pets/{id}/medications
+PUT /api/medications/{id}
+DELETE /api/medications/{id}
+GET /api/medications/overdue
+GET /api/medications/upcoming?minutes=60
+
+Eventos
+POST /api/pets/{id}/events
+
+Timeline
+GET /api/pets/{id}/timeline
+
+🧰 Base de datos
+
+Configurable desde application.properties:
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/petcare
+spring.datasource.username=postgres
+spring.datasource.password=tu_password
+
+📌 Estado del proyecto
+
+✨ Proyecto funcional y listo para ser usado como:
+
+Proyecto de portfolio
+
+Base para una aplicación real
+
+Demostración técnica en entrevistas
+
+🧑‍💻 Autor
+
+Pedro Jesús Gómez Pérez (CODIGOAFRX)
+👉 https://github.com/CODIGOAFRX
