@@ -8,7 +8,7 @@ public interface PetService {
 
     List<Pet> findAll();
 
-    Pet findById(Long id);
+    Pet getPetById(Long id);
 
     Pet create(Pet pet);
 

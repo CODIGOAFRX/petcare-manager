@@ -1,6 +1,8 @@
 package com.pedro.petcare.controller;
 
+import com.pedro.petcare.dto.TimelineItemDto;
 import com.pedro.petcare.model.Pet;
+import com.pedro.petcare.service.EventService;
 import com.pedro.petcare.service.PetService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor // Inyecta petService mediante constructor generado por Lombok
 public class PetController {
 
+    private final EventService eventService;
+    
     // Servicio que contiene la lógica de negocio para Pet
     private final PetService petService;
 
@@ -38,7 +42,7 @@ public class PetController {
      */
     @GetMapping("/{id}")
     public Pet getPetById(@PathVariable Long id) {
-        return petService.findById(id);
+        return petService.getPetById(id);
     }
 
     /**
@@ -62,6 +66,11 @@ public class PetController {
     @PutMapping("/{id}")
     public Pet updatePet(@PathVariable Long id, @Valid @RequestBody Pet pet) {
         return petService.update(id, pet);
+    }
+
+    @GetMapping("/pets/{petId}/timeline")
+        public List<TimelineItemDto> getTimeline(@PathVariable Long petId) {
+        return eventService.getTimelineForPet(petId);
     }
 
     /**

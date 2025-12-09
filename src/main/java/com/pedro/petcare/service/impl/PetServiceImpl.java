@@ -21,10 +21,11 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet findById(Long id) {
-        return petRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id " + id));
-    }
+    public Pet getPetById(Long id) {
+    return petRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id " + id));
+}
+
 
     @Override
     public Pet create(Pet pet) {
@@ -34,7 +35,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet update(Long id, Pet pet) {
-        Pet existing = findById(id); // lanza excepción si no existe
+        Pet existing = getPetById(id); // lanza excepción si no existe
 
         existing.setName(pet.getName());
         existing.setSpecies(pet.getSpecies());
@@ -48,7 +49,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void delete(Long id) {
-        Pet existing = findById(id);
+        Pet existing = getPetById(id);
         petRepository.delete(existing);
     }
 }
